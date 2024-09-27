@@ -1,5 +1,6 @@
 <?php
-class RecursoBiblioteca {
+require_once 'Prestable.php';
+abstract class RecursoBiblioteca implements Prestable {
     public $id;
     public $titulo;
     public $autor;
@@ -15,9 +16,28 @@ class RecursoBiblioteca {
             }
         }
     }
+
+    public function obtenerDetallesPrestamo(){
+
+        return $this->$tipo;
+    }
+        
 }
 
 // Implementar las clases Libro, Revista y DVD aquí
+
+class Libro extends RecursoBiblioteca{
+    public $isbn;
+
+}
+
+class Revista extends RecursoBiblioteca{
+    public $numeroEdicion;
+}
+
+class DVD extends RecursoBiblioteca{
+    public $duracion;
+}
 
 class GestorBiblioteca {
     private $recursos = [];
