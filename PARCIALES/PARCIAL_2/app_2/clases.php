@@ -29,6 +29,8 @@ abstract class RecursoBiblioteca implements Prestable {
 class Libro extends RecursoBiblioteca{
     public $isbn;
 
+    
+
 }
 
 class Revista extends RecursoBiblioteca{
