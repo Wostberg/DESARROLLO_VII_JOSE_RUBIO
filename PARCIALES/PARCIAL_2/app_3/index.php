@@ -135,8 +135,8 @@ $entradas = $gestorBlog->obtenerEntradas();
             let campos = '';
 
             for (let i = 1; i <= tipo; i++) {
-                const tituloKey = tipo === 1 ? 'titulo' : `titulo${i}`;
-                const descripcionKey = tipo === 1 ? 'descripcion' : `descripcion${i}`;
+                const tituloKey = tipo === 1 ? 'titulo' : titulo${i};
+                const descripcionKey = tipo === 1 ? 'descripcion' : descripcion${i};
 
                 const tituloValue = entradaEditar ? (entradaEditar[tituloKey] || '') : '';
                 const descripcionValue = entradaEditar ? (entradaEditar[descripcionKey] || '') : '';

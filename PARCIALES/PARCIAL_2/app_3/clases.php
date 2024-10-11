@@ -1,7 +1,11 @@
 <?php
-class Entrada {
-    public $id;
-    public $fecha_creacion;
+interface Detalle {
+    public function obtenerDetallesEspecificos(): string;
+}
+
+ abstract class Entrada implements Detalle {
+    public $id ;
+    public $fecha_creacion ; 
     public $tipo;
     public $titulo;
     public $descripcion;
@@ -14,6 +18,31 @@ class Entrada {
         }
     }
 }
+class EntradaUnaColumna extends Entrada {
+    public $titulo;
+    public $descripcion  ;
+    public function __construct($datos) {
+        parent::__construct($datos);
+        $this->titulo = $datos['titulo'] ?? '';
+    }
+    public function obtenerDetallesEspecificos(): string{
+        return parent::obtenerDetallesEspecificos() . ", titulo: $this->titulo";
+}
+}
+class  EntradaDosColumnas extends Entrada {
+    public $titulo1;
+    public $descripcion  ;
+    public $titulo2;
+    public $descripcion2;
+    public function __construct($datos) {
+        parent::__construct($datos);
+        $this->titulo = $datos['titulo1'] ?? '';
+    }
+
+    public function obtenerDetallesEspecificos(): string {
+        return parent::obtenerDetallesEspecificos() . ", titulo1: $this->titulo1";
+    }
+}
 
 class GestorBlog {
     private $entradas = [];
@@ -23,7 +52,7 @@ class GestorBlog {
             $json = file_get_contents('blog.json');
             $data = json_decode($json, true);
             foreach ($data as $entradaData) {
-                $this->entradas[] = new Entrada($entradaData);
+                $this->entradas[] = new EntradaDosColumnas($entradaData);
             }
         }
     }
@@ -38,4 +67,4 @@ class GestorBlog {
     public function obtenerEntradas() {
         return $this->entradas;
     }
-}   
+}
